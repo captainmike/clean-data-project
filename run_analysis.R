@@ -8,7 +8,7 @@ features <- read.table('UCI HAR Dataset/features.txt', col.names = c('FeatureNum
 names(data_set) <- features$FeatureName
 
 # 2. Extracts only the measurements on the mean and standard deviation for each measurement. 
-mean_std_dev_data <- data_set[, grepl('mean\\(\\)|std\\(\\)', names)]
+mean_std_dev_data <- data_set[, grepl('mean\\(\\)|std\\(\\)', names(data_set))]
 
 # 3. Uses descriptive activity names to name the activities in the data set
 
@@ -26,6 +26,9 @@ mean_std_dev_data_with_activity <- cbind(mean_std_dev_data, activity_data_set)
 training_subjects <- read.table('UCI HAR Dataset/train/subject_train.txt', col.names = c('Subject'))
 test_subjects <- read.table('UCI HAR Dataset/test/subject_test.txt', col.names = c('Subject'))
 subjects <- rbind(training_subjects, test_subjects)
+
+data <- cbind(subjects, mean_std_dev_data_with_activity, mean_std_dev_data)
+# data[1:100, 1:10]
 
 # library(plyr)
 # join
